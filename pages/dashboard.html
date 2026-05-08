@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Stationery Shop</title>
+<link rel="stylesheet" href="../cssFile/globalStyles.css">
+<script defer src="../jsFile/jsFunctions.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+<div class="logo">&#128196; Admin Dashboard</div>
+<ul class="nav-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="cart.html">Cart</a></li>
+<li><a href="login.html">Login</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="faq.html">FAQ</a></li>
+</ul>
+<div class="nav-right">
+<button onclick="toggleTheme()">&#127769;</button>
+</div>
+</nav>
+
+<!-- ================= DASHBOARD HEADER ================= -->
+<section class="dash-header">
+<h1>&#128200; Stock Management Dashboard</h1>
+<p>Manage your stationery inventory — view, add, update and delete stock records</p>
+</section>
+
+<!-- ================= STAT CARDS ================= -->
+<section class="dash-stats">
+
+<div class="stat-card">
+<div class="stat-icon">&#128230;</div>
+<div class="stat-info">
+<h3 id="totalStock">13</h3>
+<p>Total Products</p>
+</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">&#128176;</div>
+<div class="stat-info">
+<h3 id="totalValue">Rs.12,450</h3>
+<p>Total Stock Value</p>
+</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">&#128722;</div>
+<div class="stat-info">
+<h3 id="cartCount">0</h3>
+<p>Items in Cart</p>
+</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">&#9989;</div>
+<div class="stat-info">
+<h3>5</h3>
+<p>Categories</p>
+</div>
+</div>
+
+</section>
+
+<!-- ================= ACTION BUTTONS ================= -->
+<section class="dash-actions">
+<h2>&#9881;&#65039; Stock Operations</h2>
+<div class="action-grid">
+
+<div class="action-card view-card" onclick="showSection('viewSection')">
+<div class="action-icon">&#128065;</div>
+<h3>View All Stock</h3>
+<p>Browse complete inventory list</p>
+</div>
+
+<div class="action-card insert-card" onclick="showSection('insertSection')">
+<div class="action-icon">&#10133;</div>
+<h3>Insert New Stock</h3>
+<p>Add a new product to inventory</p>
+</div>
+
+<div class="action-card update-card" onclick="showSection('updateSection')">
+<div class="action-icon">&#9998;</div>
+<h3>Update Stock</h3>
+<p>Edit existing product details</p>
+</div>
+
+<div class="action-card delete-card" onclick="showSection('deleteSection')">
+<div class="action-icon">&#128465;</div>
+<h3>Delete Stock</h3>
+<p>Remove a product from inventory</p>
+</div>
+
+<div class="action-card search-card" onclick="window.location.href='products.html'">
+<div class="action-icon">&#128269;</div>
+<h3>Search Products</h3>
+<p>Find products by name or category</p>
+</div>
+
+<div class="action-card report-card" onclick="showSection('chartSection')">
+<div class="action-icon">&#128202;</div>
+<h3>Stock Reports</h3>
+<p>View graphical stock analytics</p>
+</div>
+
+</div>
+</section>
+
+<!-- ================= VIEW STOCK SECTION ================= -->
+<section class="dash-section" id="viewSection">
+<h2>&#128065; All Stock Records</h2>
+<div class="table-wrap">
+<table class="stock-table" id="stockTable">
+<thead>
+<tr>
+<th>#</th>
+<th>Product Name</th>
+<th>Category</th>
+<th>Price (Rs.)</th>
+<th>Stock Qty</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="stockTableBody">
+<!-- filled by JS -->
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ================= INSERT STOCK SECTION ================= -->
+<section class="dash-section" id="insertSection">
+<h2>&#10133; Insert New Stock</h2>
+<div class="dash-form">
+<input type="text" id="newName" placeholder="Product Name">
+<select id="newCategory">
+<option value="">Select Category</option>
+<option>Pens</option>
+<option>Pencils</option>
+<option>Notebooks</option>
+<option>Bags</option>
+<option>Markers</option>
+<option>Office Supplies</option>
+<option>Bundles</option>
+</select>
+<input type="number" id="newPrice" placeholder="Price (Rs.)">
+<input type="number" id="newQty" placeholder="Stock Quantity">
+<button onclick="insertStock()">&#10133; Add Product</button>
+</div>
+</section>
+
+<!-- ================= UPDATE STOCK SECTION ================= -->
+<section class="dash-section" id="updateSection">
+<h2>&#9998; Update Stock</h2>
+<div class="dash-form">
+<input type="text" id="updateName" placeholder="Product Name to Update">
+<input type="number" id="updatePrice" placeholder="New Price (Rs.)">
+<input type="number" id="updateQty" placeholder="New Stock Quantity">
+<button onclick="updateStock()">&#9998; Update Product</button>
+</div>
+</section>
+
+<!-- ================= DELETE STOCK SECTION ================= -->
+<section class="dash-section" id="deleteSection">
+<h2>&#128465; Delete Stock</h2>
+<div class="dash-form">
+<input type="text" id="deleteName" placeholder="Product Name to Delete">
+<button class="btn-danger" onclick="deleteStock()">&#128465; Delete Product</button>
+</div>
+</section>
+
+<!-- ================= CHART SECTION ================= -->
+<section class="dash-section" id="chartSection">
+<h2>&#128202; Stock Analytics</h2>
+<div class="chart-grid">
+
+<div class="chart-box">
+<h3>Stock by Category (Bar Chart)</h3>
+<canvas id="barChart"></canvas>
+</div>
+
+<div class="chart-box">
+<h3>Category Distribution (Pie Chart)</h3>
+<canvas id="pieChart"></canvas>
+</div>
+
+<div class="chart-box">
+<h3>Price Range Overview (Line Chart)</h3>
+<canvas id="lineChart"></canvas>
+</div>
+
+</div>
+</section>
+
+<!-- ================= QUICK LINKS ================= -->
+<section class="dash-links">
+<h2>&#128279; Quick Links</h2>
+<div class="links-grid">
+<a href="../index.html" class="quick-link">&#127968; Home</a>
+<a href="products.html" class="quick-link">&#128722; All Products</a>
+<a href="cart.html" class="quick-link">&#128717; Cart</a>
+<a href="pen.html" class="quick-link">&#128394; Pens</a>
+<a href="pencils.html" class="quick-link">&#9999; Pencils</a>
+<a href="notebooks.html" class="quick-link">&#128216; Notebooks</a>
+<a href="bags.html" class="quick-link">&#127890; Bags</a>
+<a href="markers.html" class="quick-link">&#128397; Markers</a>
+<a href="contact.html" class="quick-link">&#128222; Contact</a>
+<a href="faq.html" class="quick-link">&#10067; FAQ</a>
+<a href="login.html" class="quick-link">&#128274; Login</a>
+<a href="signup.html" class="quick-link">&#128275; Signup</a>
+</div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="dash-footer">
+<p>&#169; 2026 E-Commerce Stationery Shop &mdash; Admin Panel</p>
+</footer>
+
+<script>
+// ===== STOCK DATA =====
+let stockData = JSON.parse(localStorage.getItem("stockData")) || [
+  { name:"Gel Pen",       category:"Pens",           price:250,  qty:50 },
+  { name:"Fountain Pen",  category:"Pens",           price:850,  qty:20 },
+  { name:"Ball Pen",      category:"Pens",           price:150,  qty:80 },
+  { name:"Simple Pencil", category:"Pencils",        price:50,   qty:100 },
+  { name:"Color Pencil",  category:"Pencils",        price:350,  qty:40 },
+  { name:"School Notebook",category:"Notebooks",     price:300,  qty:60 },
+  { name:"College Notebook",category:"Notebooks",    price:450,  qty:35 },
+  { name:"Sketch Book",   category:"Notebooks",      price:500,  qty:25 },
+  { name:"School Bag",    category:"Bags",           price:2500, qty:15 },
+  { name:"Laptop Bag",    category:"Bags",           price:4000, qty:10 },
+  { name:"Whiteboard Marker",category:"Markers",     price:220,  qty:45 },
+  { name:"Highlighter",   category:"Markers",        price:180,  qty:55 },
+  { name:"Marker Pen",    category:"Markers",        price:200,  qty:30 }
+];
+
+function saveStock(){ localStorage.setItem("stockData", JSON.stringify(stockData)); }
+
+// ===== SHOW/HIDE SECTIONS =====
+function showSection(id){
+  document.querySelectorAll(".dash-section").forEach(s => s.classList.remove("active"));
+  const sec = document.getElementById(id);
+  if(sec){ sec.classList.add("active"); sec.scrollIntoView({behavior:"smooth"}); }
+  if(id === "viewSection") renderTable();
+  if(id === "chartSection") renderCharts();
+}
+
+// ===== RENDER TABLE =====
+function renderTable(){
+  const tbody = document.getElementById("stockTableBody");
+  if(!tbody) return;
+  tbody.innerHTML = "";
+  stockData.forEach((item, i) => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${i+1}</td>
+        <td>${item.name}</td>
+        <td><span class="badge">${item.category}</span></td>
+        <td>Rs.${item.price}</td>
+        <td>${item.qty}</td>
+        <td>
+          <button class="tbl-btn edit-btn" onclick="prefillUpdate('${item.name}',${item.price},${item.qty})">&#9998; Edit</button>
+          <button class="tbl-btn del-btn" onclick="quickDelete('${item.name}')">&#128465; Del</button>
+        </td>
+      </tr>`;
+  });
+}
+
+function prefillUpdate(name, price, qty){
+  document.getElementById("updateName").value = name;
+  document.getElementById("updatePrice").value = price;
+  document.getElementById("updateQty").value = qty;
+  showSection("updateSection");
+}
+
+function quickDelete(name){
+  if(confirm("Delete " + name + "?")){
+    stockData = stockData.filter(i => i.name !== name);
+    saveStock(); renderTable();
+    alert(name + " deleted.");
+  }
+}
+
+// ===== INSERT =====
+function insertStock(){
+  const name = document.getElementById("newName").value.trim();
+  const cat  = document.getElementById("newCategory").value;
+  const price= parseInt(document.getElementById("newPrice").value);
+  const qty  = parseInt(document.getElementById("newQty").value);
+  if(!name || !cat || isNaN(price) || isNaN(qty)){ alert("Please fill all fields."); return; }
+  stockData.push({ name, category:cat, price, qty });
+  saveStock();
+  alert(name + " added to stock!");
+  document.getElementById("newName").value = "";
+  document.getElementById("newPrice").value = "";
+  document.getElementById("newQty").value = "";
+}
+
+// ===== UPDATE =====
+function updateStock(){
+  const name  = document.getElementById("updateName").value.trim();
+  const price = parseInt(document.getElementById("updatePrice").value);
+  const qty   = parseInt(document.getElementById("updateQty").value);
+  const item  = stockData.find(i => i.name.toLowerCase() === name.toLowerCase());
+  if(!item){ alert("Product not found."); return; }
+  if(!isNaN(price)) item.price = price;
+  if(!isNaN(qty))   item.qty   = qty;
+  saveStock();
+  alert(name + " updated successfully!");
+}
+
+// ===== DELETE =====
+function deleteStock(){
+  const name = document.getElementById("deleteName").value.trim();
+  const idx  = stockData.findIndex(i => i.name.toLowerCase() === name.toLowerCase());
+  if(idx === -1){ alert("Product not found."); return; }
+  if(confirm("Delete " + stockData[idx].name + "?")){
+    stockData.splice(idx, 1);
+    saveStock();
+    alert(name + " deleted.");
+    document.getElementById("deleteName").value = "";
+  }
+}
+
+// ===== CHARTS =====
+let chartsRendered = false;
+function renderCharts(){
+  if(chartsRendered) return;
+  chartsRendered = true;
+
+  const categories = [...new Set(stockData.map(i => i.category))];
+  const qtys = categories.map(c => stockData.filter(i => i.category===c).reduce((s,i)=>s+i.qty,0));
+  const colors = ["#0f4c81","#00a8a8","#f59e0b","#ef4444","#8b5cf6","#10b981","#f97316"];
+
+  // BAR
+  new Chart(document.getElementById("barChart"), {
+    type:"bar",
+    data:{ labels:categories, datasets:[{ label:"Total Qty", data:qtys, backgroundColor:colors }]},
+    options:{ responsive:true, plugins:{ legend:{ display:false }}}
+  });
+
+  // PIE
+  new Chart(document.getElementById("pieChart"), {
+    type:"pie",
+    data:{ labels:categories, datasets:[{ data:qtys, backgroundColor:colors }]},
+    options:{ responsive:true }
+  });
+
+  // LINE — price trend
+  const names  = stockData.map(i => i.name.split(" ")[0]);
+  const prices = stockData.map(i => i.price);
+  new Chart(document.getElementById("lineChart"), {
+    type:"line",
+    data:{ labels:names, datasets:[{ label:"Price (Rs.)", data:prices,
+      borderColor:"#0f4c81", backgroundColor:"rgba(15,76,129,0.1)", fill:true, tension:0.4 }]},
+    options:{ responsive:true }
+  });
+}
+
+// ===== STAT: cart count =====
+window.addEventListener("load", function(){
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const el = document.getElementById("cartCount");
+  if(el) el.textContent = cart.length;
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notebooks</title>
+
+<link rel="stylesheet" href="../cssFile/globalStyles.css">
+<script defer src="../jsFile/jsFunctions.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar">
+<div class="logo">Stationery Shop</div>
+<ul class="nav-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="cart.html">Cart</a></li>
+<li><a href="login.html">Login</a></li>
+<li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="faq.html">FAQ</a></li>
+</ul>
+</nav>
+
+<header class="hero">
+<h1>Notebooks Collection</h1>
+<p>School, College & Sketch Notebooks</p>
+</header>
+
+<section class="products">
+
+<!-- SCHOOL NOTEBOOK -->
+<div class="card">
+<img src="../sources/images/schoolnotebook.jpg" alt="School Notebook">
+<h3>School Notebook</h3>
+<p class="price">Rs.300</p>
+<p class="desc">Ruled pages notebook for daily school writing and homework.</p>
+
+<button onclick="addToCart('School Notebook',300)">Add To Cart</button>
+<button onclick="buyNow('School Notebook')">Buy Now</button>
+</div>
+
+<!-- COLLEGE NOTEBOOK -->
+<div class="card">
+<img src="../sources/images/collegenotebook.jpg" alt="College Notebook">
+<h3>College Notebook</h3>
+<p class="price">Rs.450</p>
+<p class="desc">Thick pages notebook for long notes and lectures.</p>
+
+<button onclick="addToCart('College Notebook',450)">Add To Cart</button>
+<button onclick="buyNow('College Notebook')">Buy Now</button>
+</div>
+
+<!-- SKETCH BOOK -->
+<div class="card">
+<img src="../sources/images/sketchbook.jpg" alt="Sketch Book">
+<h3>Sketch Book</h3>
+<p class="price">Rs.500</p>
+<p class="desc">Premium sketch book for drawing, painting and creative work.</p>
+
+<button onclick="addToCart('Sketch Book',500)">Add To Cart</button>
+<button onclick="buyNow('Sketch Book')">Buy Now</button>
+</div>
+
+</section>
+
+</body>
+</html>

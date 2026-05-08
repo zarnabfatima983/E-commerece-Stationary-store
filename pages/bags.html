@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bags</title>
+<link rel="stylesheet" href="../cssFile/globalStyles.css">
+<script defer src="../jsFile/jsFunctions.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar">
+<div class="logo">Stationery Shop</div>
+<ul class="nav-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="cart.html">Cart</a></li>
+<li><a href="login.html">Login</a></li>
+<li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="faq.html">FAQ</a></li>
+</ul>
+</nav>
+
+<header class="hero">
+<h1>Bags Collection</h1>
+<p>School & Laptop Bags</p>
+</header>
+
+<section class="products">
+
+<!-- SCHOOL BAG -->
+<div class="card">
+<img src="../sources/images/schoolbag.jpg" alt="School Bag">
+<h3>School Bag</h3>
+<p class="price">Rs.2500</p>
+<p class="desc">Durable and comfortable school bag.</p>
+
+<button onclick="addToCart('School Bag',2500)">Add To Cart</button>
+<button onclick="buyNow('School Bag')">Buy Now</button>
+</div>
+
+<!-- LAPTOP BAG -->
+<div class="card">
+<img src="../sources/images/laptopbag.jpg" alt="Laptop Bag">
+<h3>Laptop Bag</h3>
+<p class="price">Rs.4000</p>
+<p class="desc">Safe padded laptop protection bag.</p>
+
+<button onclick="addToCart('Laptop Bag',4000)">Add To Cart</button>
+<button onclick="buyNow('Laptop Bag')">Buy Now</button>
+</div>
+
+</section>
+
+</body>
+</html>

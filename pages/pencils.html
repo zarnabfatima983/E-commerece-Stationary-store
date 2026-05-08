@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pencils</title>
+<link rel="stylesheet" href="../cssFile/globalStyles.css">
+<script defer src="../jsFile/jsFunctions.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar">
+<div class="logo">Stationery Shop</div>
+<ul class="nav-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="cart.html">Cart</a></li>
+<li><a href="login.html">Login</a></li>
+<li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="faq.html">FAQ</a></li>
+</ul>
+</nav>
+
+<header class="hero">
+<h1>Pencils Collection</h1>
+<p>Simple & Color Pencils</p>
+</header>
+
+<section class="products">
+
+<!-- SIMPLE PENCIL -->
+<div class="card">
+<img src="../sources/images/simplepencil.jpg" alt="Simple Pencil">
+<h3>Simple Pencil</h3>
+<p class="price">Rs.50</p>
+<p class="desc">Best for school writing and exams.</p>
+
+<button onclick="addToCart('Simple Pencil',50)">Add To Cart</button>
+<button onclick="buyNow('Simple Pencil')">Buy Now</button>
+</div>
+
+<!-- COLOR PENCIL -->
+<div class="card">
+<img src="../sources/images/colorpencil.jpg" alt="Color Pencil">
+<h3>Color Pencil Set</h3>
+<p class="price">Rs.350</p>
+<p class="desc">12 vibrant colors for drawing & art.</p>
+
+<button onclick="addToCart('Color Pencil Set',350)">Add To Cart</button>
+<button onclick="buyNow('Color Pencil Set')">Buy Now</button>
+</div>
+
+</section>
+
+</body>
+</html>

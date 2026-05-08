@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup - Stationery Shop</title>
+<link rel="stylesheet" href="../cssFile/globalStyles.css">
+<script defer src="../jsFile/jsFunctions.js"></script>
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+<div class="logo">&#128196; Stationery Shop</div>
+<ul class="nav-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="cart.html">Cart</a></li>
+<li><a href="login.html">Login</a></li>
+<li><a href="faq.html">FAQ</a></li>
+</ul>
+<div class="nav-right">
+<button onclick="toggleTheme()">&#127769;</button>
+</div>
+</nav>
+
+<!-- ================= SIGNUP HERO ================= -->
+<div class="auth-hero">
+<h1>&#128275; Create Account</h1>
+<p>Join us and start shopping premium stationery today</p>
+</div>
+
+<!-- ================= SIGNUP FORM ================= -->
+<div class="auth-box">
+
+<div class="auth-tabs">
+<a href="login.html" class="auth-tab">Login</a>
+<a href="signup.html" class="auth-tab active">Signup</a>
+</div>
+
+<h2>Register</h2>
+
+<div class="input-group">
+<label>Full Name</label>
+<input type="text" id="regName" placeholder="Enter your full name">
+</div>
+
+<div class="input-group">
+<label>Email Address</label>
+<input type="email" id="regEmail" placeholder="Enter your email">
+</div>
+
+<div class="input-group">
+<label>Phone Number</label>
+<input type="tel" id="regPhone" placeholder="Enter your phone number">
+</div>
+
+<div class="input-group">
+<label>Password</label>
+<input type="password" id="regPassword" placeholder="Create a password">
+</div>
+
+<div class="input-group">
+<label>Confirm Password</label>
+<input type="password" id="regConfirm" placeholder="Confirm your password">
+</div>
+
+<div class="auth-options">
+<label><input type="checkbox" id="agreeTerms"> I agree to the Terms &amp; Conditions</label>
+</div>
+
+<button class="auth-btn" onclick="registerUser()">&#128275; Create Account</button>
+
+<p class="form-link">Already have an account? <a href="login.html">Login here</a></p>
+
+</div>
+
+<script>
+function registerUser(){
+  const name    = document.getElementById("regName").value.trim();
+  const email   = document.getElementById("regEmail").value.trim();
+  const phone   = document.getElementById("regPhone").value.trim();
+  const pass    = document.getElementById("regPassword").value.trim();
+  const confirm = document.getElementById("regConfirm").value.trim();
+  const agreed  = document.getElementById("agreeTerms").checked;
+
+  if(!name || !email || !phone || !pass || !confirm){ alert("Please fill in all fields."); return; }
+  if(pass !== confirm){ alert("Passwords do not match."); return; }
+  if(!agreed){ alert("Please agree to the Terms & Conditions."); return; }
+
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  if(users.find(u => u.email === email)){ alert("Email already registered. Please login."); return; }
+
+  users.push({ name, email, phone, password:pass, role:"user" });
+  localStorage.setItem("users", JSON.stringify(users));
+  alert("Account created successfully! Please login.");
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

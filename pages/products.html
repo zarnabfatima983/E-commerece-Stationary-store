@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products - Stationery Shop</title>
+<link rel="stylesheet" href="../cssFile/globalStyles.css">
+<script defer src="../jsFile/jsFunctions.js"></script>
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+<div class="logo">&#128196; Stationery Shop</div>
+<ul class="nav-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="cart.html">Cart</a></li>
+<li><a href="login.html">Login</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="faq.html">FAQ</a></li>
+</ul>
+<div class="nav-right">
+<button onclick="toggleTheme()">&#127769;</button>
+</div>
+</nav>
+
+<!-- ================= PAGE HERO ================= -->
+<header class="hero">
+<h1>&#128722; All Products</h1>
+<p>Explore our complete stationery collection</p>
+</header>
+
+<!-- ================= SEARCH & FILTER SECTION ================= -->
+<section class="search-section">
+<h2>&#128269; Search &amp; Filter Products</h2>
+
+<div class="search-grid">
+
+<!-- Search by Name -->
+<div class="search-group">
+<label>Search by Name</label>
+<input type="text" id="searchName" placeholder="e.g. Gel Pen, Notebook..." oninput="filterProducts()">
+</div>
+
+<!-- Filter by Category -->
+<div class="search-group">
+<label>Filter by Category</label>
+<select id="filterCategory" onchange="filterProducts()">
+<option value="">All Categories</option>
+<option>Pens</option>
+<option>Pencils</option>
+<option>Notebooks</option>
+<option>Bags</option>
+<option>Markers</option>
+<option>Bundles</option>
+</select>
+</div>
+
+<!-- Filter by Min Price -->
+<div class="search-group">
+<label>Min Price (Rs.)</label>
+<input type="number" id="filterMinPrice" placeholder="e.g. 100" oninput="filterProducts()">
+</div>
+
+<!-- Filter by Max Price -->
+<div class="search-group">
+<label>Max Price (Rs.)</label>
+<input type="number" id="filterMaxPrice" placeholder="e.g. 1000" oninput="filterProducts()">
+</div>
+
+<!-- Sort -->
+<div class="search-group">
+<label>Sort By</label>
+<select id="sortBy" onchange="filterProducts()">
+<option value="">Default</option>
+<option value="price-asc">Price: Low to High</option>
+<option value="price-desc">Price: High to Low</option>
+<option value="name-asc">Name: A to Z</option>
+<option value="name-desc">Name: Z to A</option>
+</select>
+</div>
+
+<!-- Reset -->
+<div class="search-group search-reset">
+<button onclick="resetFilters()">&#10006; Reset Filters</button>
+</div>
+
+</div>
+
+<!-- Category Quick Tabs -->
+<div class="cat-tabs">
+<button class="cat-tab active" onclick="quickFilter(this,'')">All</button>
+<button class="cat-tab" onclick="quickFilter(this,'Pens')">&#128394; Pens</button>
+<button class="cat-tab" onclick="quickFilter(this,'Pencils')">&#9999; Pencils</button>
+<button class="cat-tab" onclick="quickFilter(this,'Notebooks')">&#128216; Notebooks</button>
+<button class="cat-tab" onclick="quickFilter(this,'Bags')">&#127890; Bags</button>
+<button class="cat-tab" onclick="quickFilter(this,'Markers')">&#128397; Markers</button>
+<button class="cat-tab" onclick="quickFilter(this,'Bundles')">&#127873; Bundles</button>
+</div>
+
+<p class="result-count" id="resultCount">Showing all products</p>
+</section>
+
+<!-- ================= PRODUCTS GRID ================= -->
+<section class="products" id="productGrid">
+
+<div class="card" data-name="Gel Pen" data-category="Pens" data-price="250">
+<img src="../sources/images/gelpen.jpg" alt="Gel Pen">
+<span class="cat-badge">Pens</span>
+<h3>Gel Pen</h3>
+<p class="price">Rs.250</p>
+<p class="desc">Smooth writing gel pen for daily use.</p>
+<button onclick="addToCart('Gel Pen',250)">&#128717; Add To Cart</button>
+<button onclick="buyNow('Gel Pen')">&#9889; Buy Now</button>
+</div>
+
+<div class="card" data-name="Fountain Pen" data-category="Pens" data-price="850">
+<img src="../sources/images/fountainpen.jpg" alt="Fountain Pen">
+<span class="cat-badge">Pens</span>
+<h3>Fountain Pen</h3>
+<p class="price">Rs.850</p>
+<p class="desc">Luxury pen with elegant premium finish.</p>
+<button onclick="addToCart('Fountain Pen',850)">&#128717; Add To Cart</button>
+<button onclick="buyNow('Fountain Pen')">&#9889; Buy Now</button>
+</div>
+
+<div class="card" data-name="Ball Pen" data-category="Pens" data-price="150">
+<img src="../sources/images/ballpen.jpg" alt="Ball Pen">
+<span class="cat-badge">Pens</span>
+<h3>Ball Pen</h3>
+<p class="price">Rs.150</p>
+<p class="desc">Simple and reliable everyday pen.</p>
+<button onclick="addToCart('Ball Pen',150)">&#128717; Add To Cart</button>
+<button onclick="buyNow('Ball Pen')">&#9889; Buy Now</button>
+</div>
+
+<div class="card" data-name="Simple Pencil" data-category="Pencils" data-price="50">
+<img src="../sources/images/simplepencil.jpg" alt="Simple Pencil">
+<span class="cat-badge">Pencils</span>
+<h3>Simple Pencil</h3>
+<p class="price">Rs.50</p>
+<p class="desc">Best for school writing and exams.</p>
+<button onclick="addToCart('Simple Pencil',50)">&#128717; Add To Cart</button>
+<button onclick="buyNow('Simple Pencil')">&#9889; Buy Now</button>
+</div>
+
+<div class="card" data-name="Color Pencil Set" data-category="Pencils" data-price="350">
+<img src="../sources/images/colorpencil.jpg" alt="Color Pencil Set">
+<span class="cat-badge">Pencils</span>
+<h3>Color Pencil Set</h3>
+<p class="price">Rs.350</p>
+<p class="desc">12 vibrant colors for drawing and art.</p>
+<button onclick="addToCart('Color Pencil Set',350)">&#128717; Add To Cart</button>
+<button onclick="buyNow('Color Pencil Set')">&#9889; Buy Now</button>
+</div>
+
+<div class="card" data-name="School Notebook" data-category="Notebooks" data-price="300">
+<img src="../sources/images/schoolnotebook.jpg" alt="School Notebook">
+<span class="cat-badge">Notebooks</span>
+<h3>School Notebook</h3>
+<p class="price">Rs.300</p>
+<p class="desc">Ruled pages notebook for daily school writing.</p>
+<button onclick="addToCart('School Notebook',300)">&#128717; Add To Cart</button>
+<button onclick="buyNow('School Notebook')">&#9889; Buy Now</button>
+</div>
+
+<div class="card" data-name="College Notebook" data-category="Notebooks" data-price="450">
+<img src="../sources/images/collegenotebook.jpg" alt="College Notebook">
+<span class="cat-badge">Notebooks</span>
+<h3>College Notebook</h3>
+<p class="price">Rs.450</p>
+<p class="desc">Thick pages notebook for long notes and lectures.</p>
+<button onclick="addToCart('College Notebook',450)">&#128717; Add To Cart</button>
+<button onclick="buyNow('College Notebook')">&#9889; Buy Now</button>
+</div>
+
+<div class="card" data-name="Sketch Book" data-category="Notebooks" data-price="500">
+<img src="../sources/images/sketchbook.jpg" alt="Sketch Book">
+<span class="cat-badge">Notebooks</span>
+<h3>Sketch Book</h3>
+<p class="price">Rs.500</p>
+<p class="desc">Premium sketch book for drawing and creative work.</p>
+<button onclick="addToCart('Sketch Book',500)">&#128717; Add To Cart</button>
+<button onclick="buyNow('Sketch Book')">&#9889; Buy Now</button>
+</div>
+
+<div class="card" data-name="School Bag" data-category="Bags" data-price="2500">
+<img src="../sources/images/schoolbag.jpg" alt="School Bag">
+<span class="cat-badge">Bags</span>
+<h3>School Bag</h3>
+<p class="price">Rs.2500</p>
+<p class="desc">Durable and comfortable school bag.</p>
+<button onclick="addToCart('School Bag',2500)">&#128717; Add To Cart</button>
+<button onclick="buyNow('School Bag')">&#9889; Buy Now</button>
+</div>
+
+<div class="card" data-name="Laptop Bag" data-category="Bags" data-price="4000">
+<img src="../sources/images/laptopbag.jpg" alt="Laptop Bag">
+<span class="cat-badge">Bags</span>
+<h3>Laptop Bag</h3>
+<p class="price">Rs.4000</p>
+<p class="desc">Safe padded laptop protection bag.</p>
+<button onclick="addToCart('Laptop Bag',4000)">&#128717; Add To Cart</button>
+<button onclick="buyNow('Laptop Bag')">&#9889; Buy Now</button>
+</div>
+
+<div class="card" data-name="Whiteboard Marker" data-category="Markers" data-price="220">
+<img src="../sources/images/whiteboard.jpg" alt="Whiteboard Marker">
+<span class="cat-badge">Markers</span>
+<h3>Whiteboard Marker</h3>
+<p class="price">Rs.220</p>
+<p class="desc">Easy erase marker for board writing.</p>
+<button onclick="addToCart('Whiteboard Marker',220)">&#128717; Add To Cart</button>
+<button onclick="buyNow('Whiteboard Marker')">&#9889; Buy Now</button>
+</div>
+
+<div class="card" data-name="Highlighter" data-category="Markers" data-price="180">
+<img src="../sources/images/highlighter.jpg" alt="Highlighter">
+<span class="cat-badge">Markers</span>
+<h3>Highlighter</h3>
+<p class="price">Rs.180</p>
+<p class="desc">Bright color marker for important text.</p>
+<button onclick="addToCart('Highlighter',180)">&#128717; Add To Cart</button>
+<button onclick="buyNow('Highlighter')">&#9889; Buy Now</button>
+</div>
+
+<div class="card" data-name="Marker Pen" data-category="Markers" data-price="200">
+<img src="../sources/images/markerpen.jpg" alt="Marker Pen">
+<span class="cat-badge">Markers</span>
+<h3>Marker Pen</h3>
+<p class="price">Rs.200</p>
+<p class="desc">Bold color marker pen for art and labeling.</p>
+<button onclick="addToCart('Marker Pen',200)">&#128717; Add To Cart</button>
+<button onclick="buyNow('Marker Pen')">&#9889; Buy Now</button>
+</div>
+
+<!-- PROMOTIONAL BUNDLE -->
+<div class="card bundle-card" data-name="Student Bundle" data-category="Bundles" data-price="999">
+<img src="../sources/images/bundle.jpg" alt="Student Bundle">
+<span class="cat-badge bundle-badge">&#127873; Bundle</span>
+<h3>Student Bundle</h3>
+<p class="price">Rs.999 <span class="old-price">Rs.1400</span></p>
+<p class="desc">Notebook + Gel Pen + Color Pencil Set — Save Rs.401!</p>
+<button onclick="addToCart('Student Bundle',999)">&#128717; Add To Cart</button>
+<button onclick="buyNow('Student Bundle')">&#9889; Buy Now</button>
+</div>
+
+<div class="card bundle-card" data-name="Office Bundle" data-category="Bundles" data-price="1499">
+<img src="../sources/images/office-set.jfif" alt="Office Bundle">
+<span class="cat-badge bundle-badge">&#127873; Bundle</span>
+<h3>Office Bundle</h3>
+<p class="price">Rs.1499 <span class="old-price">Rs.2000</span></p>
+<p class="desc">Ball Pen x5 + Highlighter x3 + Whiteboard Marker x2</p>
+<button onclick="addToCart('Office Bundle',1499)">&#128717; Add To Cart</button>
+<button onclick="buyNow('Office Bundle')">&#9889; Buy Now</button>
+</div>
+
+</section>
+
+<!-- NO RESULTS MESSAGE -->
+<p class="no-results" id="noResults">No products found matching your search.</p>
+
+<script>
+function filterProducts(){
+  const name    = document.getElementById("searchName").value.toLowerCase();
+  const cat     = document.getElementById("filterCategory").value;
+  const minP    = parseFloat(document.getElementById("filterMinPrice").value) || 0;
+  const maxP    = parseFloat(document.getElementById("filterMaxPrice").value) || Infinity;
+  const sortBy  = document.getElementById("sortBy").value;
+
+  let cards = Array.from(document.querySelectorAll("#productGrid .card"));
+  let visible = [];
+
+  cards.forEach(card => {
+    const cName  = card.dataset.name.toLowerCase();
+    const cCat   = card.dataset.category;
+    const cPrice = parseFloat(card.dataset.price);
+
+    const matchName = cName.includes(name);
+    const matchCat  = cat === "" || cCat === cat;
+    const matchPrice= cPrice >= minP && cPrice <= maxP;
+
+    if(matchName && matchCat && matchPrice){
+      card.classList.remove("hidden");
+      visible.push(card);
+    } else {
+      card.classList.add("hidden");
+    }
+  });
+
+  // Sort
+  const grid = document.getElementById("productGrid");
+  if(sortBy){
+    visible.sort((a,b) => {
+      if(sortBy === "price-asc")  return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+      if(sortBy === "price-desc") return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+      if(sortBy === "name-asc")   return a.dataset.name.localeCompare(b.dataset.name);
+      if(sortBy === "name-desc")  return b.dataset.name.localeCompare(a.dataset.name);
+    });
+    visible.forEach(c => grid.appendChild(c));
+  }
+
+  const count = document.getElementById("resultCount");
+  const noRes = document.getElementById("noResults");
+  if(visible.length === 0){
+    noRes.classList.remove("hidden");
+    count.textContent = "No products found";
+  } else {
+    noRes.classList.add("hidden");
+    count.textContent = "Showing " + visible.length + " product(s)";
+  }
+}
+
+function quickFilter(btn, category){
+  document.querySelectorAll(".cat-tab").forEach(t => t.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById("filterCategory").value = category;
+  filterProducts();
+}
+
+function resetFilters(){
+  document.getElementById("searchName").value = "";
+  document.getElementById("filterCategory").value = "";
+  document.getElementById("filterMinPrice").value = "";
+  document.getElementById("filterMaxPrice").value = "";
+  document.getElementById("sortBy").value = "";
+  document.querySelectorAll(".cat-tab").forEach(t => t.classList.remove("active"));
+  document.querySelector(".cat-tab").classList.add("active");
+  filterProducts();
+}
+</script>
+
+</body>
+</html>

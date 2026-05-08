@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart - Stationery Shop</title>
+<link rel="stylesheet" href="../cssFile/globalStyles.css">
+<script defer src="../jsFile/jsFunctions.js"></script>
+</head>
+<body onload="renderCart()">
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+<div class="logo">&#128196; Stationery Shop</div>
+<ul class="nav-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="cart.html">Cart</a></li>
+<li><a href="login.html">Login</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="faq.html">FAQ</a></li>
+</ul>
+<div class="nav-right">
+<button onclick="toggleTheme()">&#127769;</button>
+</div>
+</nav>
+
+<!-- ================= CART HERO ================= -->
+<header class="hero">
+<h1>&#128717; Your Shopping Cart</h1>
+<p>Review your items before placing the order</p>
+</header>
+
+<!-- ================= CART LAYOUT ================= -->
+<div class="cart-layout">
+
+<!-- LEFT: CART ITEMS -->
+<div class="cart-main">
+<div class="cart-box">
+<h2>&#128230; Cart Items</h2>
+<div id="cartItems"></div>
+</div>
+</div>
+
+<!-- RIGHT: ORDER SUMMARY -->
+<div class="cart-summary">
+<div class="summary-box">
+<h2>&#128203; Order Summary</h2>
+
+<div class="summary-row">
+<span>Subtotal</span>
+<span id="subtotal">Rs.0</span>
+</div>
+<div class="summary-row">
+<span>Delivery</span>
+<span id="delivery">Rs.150</span>
+</div>
+<div class="summary-row discount-row">
+<span>Discount</span>
+<span id="discount">- Rs.0</span>
+</div>
+<div class="summary-divider"></div>
+<div class="summary-row total-row">
+<span>Total</span>
+<span id="cartTotal">Rs.0</span>
+</div>
+
+<div class="promo-box">
+<input type="text" id="promoInput" placeholder="Enter promo code">
+<button onclick="applyPromo()">Apply</button>
+</div>
+<p class="promo-hint">Try: <strong>SAVE10</strong> for 10% off</p>
+
+<button class="order-btn" onclick="placeOrder()">&#9989; Place Order</button>
+<a href="products.html" class="continue-link">&#8592; Continue Shopping</a>
+</div>
+</div>
+
+</div>
+
+<script>
+let promoApplied = false;
+
+function renderCart(){
+  const cart    = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartBox = document.getElementById("cartItems");
+  if(!cartBox) return;
+
+  cartBox.innerHTML = "";
+  let subtotal = 0;
+
+  if(cart.length === 0){
+    cartBox.innerHTML = `
+      <div class="empty-cart">
+        <p>&#128717; Your cart is empty.</p>
+        <a href="products.html" class="auth-btn">Start Shopping</a>
+      </div>`;
+    updateSummary(0);
+    return;
+  }
+
+  cart.forEach((item, index) => {
+    subtotal += item.price;
+    cartBox.innerHTML += `
+      <div class="cart-item">
+        <div class="cart-item-info">
+          <span class="cart-item-name">${item.name}</span>
+          <span class="cart-item-price">Rs.${item.price}</span>
+        </div>
+        <button onclick="removeFromCart(${index})">&#128465; Remove</button>
+      </div>`;
+  });
+
+  cartBox.innerHTML += `<button class="clear-btn" onclick="clearCart()">&#10006; Clear Cart</button>`;
+  updateSummary(subtotal);
+}
+
+function updateSummary(subtotal){
+  const delivery = subtotal > 0 ? 150 : 0;
+  let discount = 0;
+  if(promoApplied) discount = Math.round(subtotal * 0.10);
+  const total = subtotal + delivery - discount;
+
+  const el = id => document.getElementById(id);
+  if(el("subtotal"))  el("subtotal").textContent  = "Rs." + subtotal;
+  if(el("delivery"))  el("delivery").textContent  = "Rs." + delivery;
+  if(el("discount"))  el("discount").textContent  = "- Rs." + discount;
+  if(el("cartTotal")) el("cartTotal").textContent = "Rs." + total;
+}
+
+function applyPromo(){
+  const code = document.getElementById("promoInput").value.trim().toUpperCase();
+  if(code === "SAVE10"){
+    promoApplied = true;
+    alert("Promo code applied! 10% discount added.");
+    renderCart();
+  } else {
+    alert("Invalid promo code.");
+  }
+}
+
+function removeFromCart(index){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+}
+
+function clearCart(){
+  localStorage.setItem("cart", JSON.stringify([]));
+  promoApplied = false;
+  renderCart();
+}
+
+function placeOrder(){
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  if(cart.length === 0){ alert("Your cart is empty!"); return; }
+  alert("&#9989; Order placed successfully! Thank you for shopping with us.");
+  clearCart();
+}
+</script>
+
+</body>
+</html>

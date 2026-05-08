@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Commerce Stationery Shop</title>
+
+<link rel="stylesheet" href="cssFile/globalStyles.css">
+<script defer src="jsFile/jsFunctions.js"></script>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+<div class="logo">Stationery Shop</div>
+
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="pages/products.html">Products</a></li>
+<li><a href="pages/cart.html">Cart</a></li>
+<li><a href="pages/login.html">Login</a></li>
+<li><a href="pages/dashboard.html">Dashboard</a></li>
+<li><a href="pages/contact.html">Contact</a></li>
+<li><a href="pages/faq.html">FAQ</a></li>
+</ul>
+
+<div class="nav-right">
+<input type="text" id="searchInput" placeholder="Search Products..." onkeyup="searchProducts()">
+<button onclick="toggleTheme()">🌙</button>
+</div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+<h1>Premium Stationery Collection</h1>
+<p>Buy Pens, Bags, Notebooks, Pencils & More</p>
+
+<!-- ✔ FIXED SHOP NOW BUTTON -->
+<a href="pages/products.html" class="btn">Shop Now</a>
+</header>
+
+<!-- ================= PRODUCTS ================= -->
+<section class="products" id="productList">
+
+<div class="card">
+<img src="sources/images/fountainpen.jpg" alt="Fountain Pen">
+<h3>Fountain Pen</h3>
+<p>Rs.250</p>
+
+<button onclick="addToCart('Fountain Pen',250)">Add To Cart</button>
+<button onclick="buyNow('Fountain Pen')">Buy Now</button>
+</div>
+
+<div class="card">
+<img src="sources/images/schoolbag.jpg" alt="School Bag">
+<h3>School Bag</h3>
+<p>Rs.2500</p>
+
+<button onclick="addToCart('School Bag',2500)">Add To Cart</button>
+<button onclick="buyNow('School Bag')">Buy Now</button>
+</div>
+
+<div class="card">
+<img src="sources/images/schoolnotebook.jpg" alt="Notebook">
+<h3>Notebook</h3>
+<p>Rs.450</p>
+
+<button onclick="addToCart('Notebook',450)">Add To Cart</button>
+<button onclick="buyNow('Notebook')">Buy Now</button>
+</div>
+
+<div class="card">
+<img src="sources/images/colorpencil.jpg" alt="Color Pencil">
+<h3>Color Pencil</h3>
+<p>Rs.350</p>
+<p>Premium color set for art.</p>
+<button onclick="addToCart('Color Pencil',350)">Add To Cart</button>
+<button onclick="buyNow('Color Pencil')">Buy Now</button>
+</div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+<p>© 2026 E-Commerce Stationery Shop</p>
+</footer>
+
+</body>
+</html>
